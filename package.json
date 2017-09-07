@@ -2,7 +2,6 @@
   "//1": "request header parser",
   "//2": "https://docs.npmjs.com/files/package.json",
   "//3": "updating this file will download and update your packages",
-
   "name": "request header parser",
   "version": "0.0.1",
   "description": "parses user details from the request header as JSON",
@@ -17,7 +16,7 @@
     "node": "8.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/welcome-project"
+    "url": "https://github.com/J-Sanderson/FCC-Request-Header-Parser"
   },
   "license": "MIT",
   "keywords": [
