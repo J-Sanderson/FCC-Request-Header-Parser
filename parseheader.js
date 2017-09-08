@@ -1,12 +1,18 @@
-function getIP(str) {
-  //IPv6 string begins with :
-  if (str.substr(0, 1) === ':') {
-    //IP will be the last item in a colon seperated list
-    str = str.split(':');
-    return str[str.length - 1];
+function getIP(req) {
+  //handle proxies
+  if (req.headers['x-forwarded-for']){
+    return req.headers['x-forwarded-for'].split(',')[0];
   } else {
-    //IPv4, no editing required
-    return str;
+    var str = req.connection.remoteAddress;
+    //IPv6 string begins with :
+    if (str.substr(0, 1) === ':') {
+      //IP will be the last item in a colon seperated list
+      str = str.split(':');
+      return str[str.length - 1];
+    } else {
+      //IPv4, no editing required
+      return str;
+    }
   }
 }
 
@@ -24,7 +30,7 @@ function getOS(str) {
 
 module.exports = function(req) {
   return {
-    ipaddress: getIP(req.connection.remoteAddress),
+    ipaddress: getIP(req),
     language: getLang(req.headers['accept-language']),
     OS: getOS(req.headers['user-agent'])
   }
