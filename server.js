@@ -8,7 +8,8 @@ app.get("/", function (req, res) {
 });
 
 app.get("/whoami", function (req, res) {
-  parseHeader(req, res);
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify(parseHeader(req)));
 });
 
 app.listen(process.env.PORT);
